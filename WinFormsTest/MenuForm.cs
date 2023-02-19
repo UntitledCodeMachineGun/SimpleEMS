@@ -12,25 +12,25 @@ namespace WinFormsTest
         private void ShowEmpBtn_Click(object sender, EventArgs e)
         {
             EmployeesViewForm employeesView = new EmployeesViewForm();
-            employeesView.Show();
+            employeesView.ShowDialog();
         }
 
         private void AddNewEmpBtn_Click(object sender, EventArgs e)
         {
-            AddEmpForm addEmp = new AddEmpForm();
-            addEmp.Show();
+            AddEmpForm addEmp = new AddEmpForm(new Models.Employee());
+            addEmp.ShowDialog();
         }
 
         private void AddNewDeptBtn_Click(object sender, EventArgs e)
         {
             AddNewDeptForm addDept = new AddNewDeptForm();
-            addDept.Show();
+            addDept.ShowDialog();
         }
 
         private void AddNewPosBtn_Click(object sender, EventArgs e)
         {
             AddNewPosForm addPos = new AddNewPosForm();
-            addPos.Show();
+            addPos.ShowDialog();
         }
     }
 }

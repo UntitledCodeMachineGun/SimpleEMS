@@ -5,9 +5,35 @@ namespace WinFormsTest
 {
     public partial class AddEmpForm : Form
     {
-        public AddEmpForm()
+        public Employee Employee { get; set; }
+        private bool _mode = true;
+
+        public AddEmpForm(Employee employee)
         {
+            Employee = employee;
             InitializeComponent();
+        }
+        public AddEmpForm(Employee employee, string id)
+        {
+            Employee = employee;
+            
+            InitializeComponent();
+
+            if (Employee.Name != null)
+            {
+                Employee.Id = Convert.ToInt32(id);
+                NameTextBox.Text = Employee.Name;
+                SurnameTextBox.Text = Employee.Surname;
+                FathernameTextBox.Text = Employee.FatherName;
+                AddressTextBox.Text = Employee.Address;
+                PhoneTextBox.Text = Employee.Phone;
+                BirthDatePicker.Value = Employee.DateOfBirth;
+                HireDatePicker.Value = Employee.DateOfHire;
+                SalaryTextBox.Text = Employee.Salary.ToString();
+                DeptComboBox.SelectedValue = Employee.DeptId;
+                PosComboBox.SelectedValue = Employee.PosId;
+                _mode = false;
+            }
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
@@ -15,21 +41,19 @@ namespace WinFormsTest
             try
             {
                 EmployeeRepository repository = new EmployeeRepository();
-                var employee = new Employee()
-                {
-                    Name = NameTextBox.Text,
-                    Surname = SurnameTextBox.Text,
-                    FatherName = FathernameTextBox.Text,
-                    Address = AddressTextBox.Text,
-                    Phone = PhoneTextBox.Text,
-                    DateOfBirth = BirthDatePicker.Value,
-                    DateOfHire = HireDatePicker.Value,
-                    Salary = Convert.ToInt32(SalaryTextBox.Text),
-                    DeptId = Convert.ToInt32(DeptComboBox.SelectedValue),
-                    PosId = Convert.ToInt32(PosComboBox.SelectedValue),
 
-                };
-                repository.Save(employee);
+                Employee.Name = NameTextBox.Text;
+                Employee.Surname = SurnameTextBox.Text;
+                Employee.FatherName = FathernameTextBox.Text;
+                Employee.Address = AddressTextBox.Text;
+                Employee.Phone = PhoneTextBox.Text;
+                Employee.DateOfBirth = BirthDatePicker.Value;
+                Employee.DateOfHire = HireDatePicker.Value;
+                Employee.Salary = Convert.ToInt32(SalaryTextBox.Text);
+                Employee.DeptId = Convert.ToInt32(DeptComboBox.SelectedValue);
+                Employee.PosId = Convert.ToInt32(PosComboBox.SelectedValue);
+
+                repository.Save(Employee, _mode);
             }
             catch (Exception ex) 
             {

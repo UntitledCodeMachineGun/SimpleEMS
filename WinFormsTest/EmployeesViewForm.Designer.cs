@@ -50,6 +50,8 @@
             // 
             // EmpGridView
             // 
+            this.EmpGridView.AllowUserToAddRows = false;
+            this.EmpGridView.AllowUserToDeleteRows = false;
             this.EmpGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -74,6 +76,7 @@
             this.EmpGridView.RowTemplate.Height = 25;
             this.EmpGridView.Size = new System.Drawing.Size(776, 371);
             this.EmpGridView.TabIndex = 0;
+            this.EmpGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.EmpGridView_CellContentClick);
             // 
             // ID
             // 
