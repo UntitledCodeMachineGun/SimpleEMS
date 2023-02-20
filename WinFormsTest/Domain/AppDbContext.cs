@@ -1,5 +1,4 @@
 ﻿using System.Data.SqlClient;
-using WinFormsTest.Models;
 using WinFormsTest.Models.Abstract;
 
 namespace WinFormsTest.Domain
@@ -10,7 +9,6 @@ namespace WinFormsTest.Domain
         public SqlConnection SqlConnection = new SqlConnection(_connectionString);
         public SqlCommand Cmd;
         public SqlDataReader Reader;
-        public SqlDataAdapter Adapter;
 
         /// <summary>
         /// Delete record
@@ -62,7 +60,12 @@ namespace WinFormsTest.Domain
             SqlConnection.Close();
             return entities;
         }
-
+        /// <summary>
+        /// Get strings of single column
+        /// </summary>
+        /// <param name="tableName">Name of table</param>
+        /// <param name="columnName">Name of column</param>
+        /// <returns></returns>
         public List<string> GetStrings(string tableName, string columnName)
         {
             Cmd = new SqlCommand($"select {columnName} from {tableName}", SqlConnection);

@@ -10,6 +10,7 @@ namespace WinFormsTest
         public EmployeesViewForm()
         {
             InitializeComponent();
+            LoadData();
         }
 
         private void EmpGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -30,17 +31,23 @@ namespace WinFormsTest
 
         private void EmployeesViewForm_Activated(object sender, EventArgs e)
         {
-            repository.Load(EmpGridView);
-            EmpGridView.Columns["DeptId"].Visible = false;
-            EmpGridView.Columns["PosId"].Visible = false;
+
         }
 
         private void FilterBtn_Click(object sender, EventArgs e)
         {
-            DataView dv = (DataView)EmpGridView.DataSource;
+            DataView dv = new DataView();
+            try
+            {
+                dv = (DataView)EmpGridView.DataSource;
+            }
+            catch
+            {
+                LoadData();
+            }
+            
 
             var filter = new Filter();
-
             dv.RowFilter = filter.GetFilteredQuery(FilterByDeptCombo, FilterByPosCombo,
                 FilterByNameCombo, FilterBySurnameCombo, FilterByFatherCombo);
         }
@@ -80,6 +87,51 @@ namespace WinFormsTest
             FilterByNameCombo.SelectedItem = null;
             FilterBySurnameCombo.SelectedItem = null;
             FilterByFatherCombo.SelectedItem = null;
+        }
+
+        private void CreateRaportBtn_Click(object sender, EventArgs e)
+        {
+            var creator = new ReportCreator(EmpGridView);
+
+            if (GroupByDeptCheck.Checked && GroupByPosCheck.Checked)
+            {
+                creator.CreateReportByAll();
+                HideControls();
+            }
+            else if (GroupByDeptCheck.Checked)
+            {
+                creator.CreateReportByDept();
+                HideControls();
+            }
+            else if (GroupByPosCheck.Checked)
+            {
+                creator.CreateReportByPos();
+                HideControls();
+            }
+            else
+            {
+                MessageBox.Show("Select a filter!");
+            }            
+        }
+
+        private void RefreshBtn_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            repository.Load(EmpGridView);
+            EmpGridView.Columns[0].Visible = true;
+            EmpGridView.Columns[1].Visible = true;
+            EmpGridView.Columns["DeptId"].Visible = false;
+            EmpGridView.Columns["PosId"].Visible = false;
+        }
+
+        private void HideControls()
+        {
+            EmpGridView.Columns[0].Visible = false;
+            EmpGridView.Columns[1].Visible = false;
         }
     }
 }

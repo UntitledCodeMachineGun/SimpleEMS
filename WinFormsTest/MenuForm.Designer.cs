@@ -32,7 +32,6 @@
             this.CompanyNameLabel = new System.Windows.Forms.Label();
             this.ShowEmpBtn = new System.Windows.Forms.Button();
             this.AddNewEmpBtn = new System.Windows.Forms.Button();
-            this.ReportBtn = new System.Windows.Forms.Button();
             this.AddNewDeptBtn = new System.Windows.Forms.Button();
             this.AddNewPosBtn = new System.Windows.Forms.Button();
             this.CompanyInfoEditBtn = new System.Windows.Forms.Button();
@@ -54,7 +53,7 @@
             // 
             this.CompanyNameLabel.AutoSize = true;
             this.CompanyNameLabel.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CompanyNameLabel.Location = new System.Drawing.Point(66, 33);
+            this.CompanyNameLabel.Location = new System.Drawing.Point(65, 55);
             this.CompanyNameLabel.Name = "CompanyNameLabel";
             this.CompanyNameLabel.Size = new System.Drawing.Size(254, 45);
             this.CompanyNameLabel.TabIndex = 1;
@@ -62,7 +61,7 @@
             // 
             // ShowEmpBtn
             // 
-            this.ShowEmpBtn.Location = new System.Drawing.Point(12, 110);
+            this.ShowEmpBtn.Location = new System.Drawing.Point(12, 166);
             this.ShowEmpBtn.Name = "ShowEmpBtn";
             this.ShowEmpBtn.Size = new System.Drawing.Size(368, 50);
             this.ShowEmpBtn.TabIndex = 2;
@@ -79,15 +78,6 @@
             this.AddNewEmpBtn.Text = "Add new employee";
             this.AddNewEmpBtn.UseVisualStyleBackColor = true;
             this.AddNewEmpBtn.Click += new System.EventHandler(this.AddNewEmpBtn_Click);
-            // 
-            // ReportBtn
-            // 
-            this.ReportBtn.Location = new System.Drawing.Point(12, 166);
-            this.ReportBtn.Name = "ReportBtn";
-            this.ReportBtn.Size = new System.Drawing.Size(368, 50);
-            this.ReportBtn.TabIndex = 4;
-            this.ReportBtn.Text = "Salary report";
-            this.ReportBtn.UseVisualStyleBackColor = true;
             // 
             // AddNewDeptBtn
             // 
@@ -127,7 +117,6 @@
             this.Controls.Add(this.CompanyInfoEditBtn);
             this.Controls.Add(this.AddNewPosBtn);
             this.Controls.Add(this.AddNewDeptBtn);
-            this.Controls.Add(this.ReportBtn);
             this.Controls.Add(this.AddNewEmpBtn);
             this.Controls.Add(this.ShowEmpBtn);
             this.Controls.Add(this.CompanyNameLabel);
@@ -147,7 +136,6 @@
         private Label CompanyNameLabel;
         private Button ShowEmpBtn;
         private Button AddNewEmpBtn;
-        private Button ReportBtn;
         private Button AddNewDeptBtn;
         private Button AddNewPosBtn;
         private Button CompanyInfoEditBtn;

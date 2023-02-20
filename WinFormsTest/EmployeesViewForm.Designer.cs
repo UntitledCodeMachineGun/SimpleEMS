@@ -34,6 +34,7 @@
             this.Edit = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.FiltersBox = new System.Windows.Forms.GroupBox();
+            this.ClearFiltersBtn = new System.Windows.Forms.Button();
             this.FilterBtn = new System.Windows.Forms.Button();
             this.ByFatherFilterLabel = new System.Windows.Forms.Label();
             this.FilterByFatherCombo = new System.Windows.Forms.ComboBox();
@@ -45,16 +46,21 @@
             this.FilterByDeptCombo = new System.Windows.Forms.ComboBox();
             this.ByPosFilterLabel = new System.Windows.Forms.Label();
             this.FilterByPosCombo = new System.Windows.Forms.ComboBox();
-            this.ClearFiltersBtn = new System.Windows.Forms.Button();
+            this.CreateReportBtn = new System.Windows.Forms.Button();
+            this.SalaryReport = new System.Windows.Forms.GroupBox();
+            this.GroupByPosCheck = new System.Windows.Forms.CheckBox();
+            this.GroupByDeptCheck = new System.Windows.Forms.CheckBox();
+            this.GroupByLabel = new System.Windows.Forms.Label();
+            this.RefreshBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.EmpGridView)).BeginInit();
             this.FiltersBox.SuspendLayout();
+            this.SalaryReport.SuspendLayout();
             this.SuspendLayout();
             // 
             // EmpGridView
             // 
             this.EmpGridView.AllowUserToAddRows = false;
             this.EmpGridView.AllowUserToDeleteRows = false;
-            this.EmpGridView.AllowUserToOrderColumns = true;
             this.EmpGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -66,7 +72,7 @@
             this.EmpGridView.Name = "EmpGridView";
             this.EmpGridView.ReadOnly = true;
             this.EmpGridView.RowTemplate.Height = 25;
-            this.EmpGridView.Size = new System.Drawing.Size(776, 352);
+            this.EmpGridView.Size = new System.Drawing.Size(1110, 352);
             this.EmpGridView.TabIndex = 0;
             this.EmpGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.EmpGridView_CellContentClick);
             // 
@@ -112,16 +118,26 @@
             this.FiltersBox.Controls.Add(this.FilterByPosCombo);
             this.FiltersBox.Location = new System.Drawing.Point(12, 8);
             this.FiltersBox.Name = "FiltersBox";
-            this.FiltersBox.Size = new System.Drawing.Size(776, 72);
+            this.FiltersBox.Size = new System.Drawing.Size(677, 72);
             this.FiltersBox.TabIndex = 1;
             this.FiltersBox.TabStop = false;
             this.FiltersBox.Text = "Filters";
             // 
+            // ClearFiltersBtn
+            // 
+            this.ClearFiltersBtn.Location = new System.Drawing.Point(588, 21);
+            this.ClearFiltersBtn.Name = "ClearFiltersBtn";
+            this.ClearFiltersBtn.Size = new System.Drawing.Size(85, 22);
+            this.ClearFiltersBtn.TabIndex = 11;
+            this.ClearFiltersBtn.Text = "Clear";
+            this.ClearFiltersBtn.UseVisualStyleBackColor = true;
+            this.ClearFiltersBtn.Click += new System.EventHandler(this.ClearFiltersBtn_Click);
+            // 
             // FilterBtn
             // 
-            this.FilterBtn.Location = new System.Drawing.Point(641, 43);
+            this.FilterBtn.Location = new System.Drawing.Point(588, 44);
             this.FilterBtn.Name = "FilterBtn";
-            this.FilterBtn.Size = new System.Drawing.Size(129, 22);
+            this.FilterBtn.Size = new System.Drawing.Size(85, 22);
             this.FilterBtn.TabIndex = 10;
             this.FilterBtn.Text = "Find";
             this.FilterBtn.UseVisualStyleBackColor = true;
@@ -130,7 +146,7 @@
             // ByFatherFilterLabel
             // 
             this.ByFatherFilterLabel.AutoSize = true;
-            this.ByFatherFilterLabel.Location = new System.Drawing.Point(514, 19);
+            this.ByFatherFilterLabel.Location = new System.Drawing.Point(483, 19);
             this.ByFatherFilterLabel.Name = "ByFatherFilterLabel";
             this.ByFatherFilterLabel.Size = new System.Drawing.Size(84, 15);
             this.ByFatherFilterLabel.TabIndex = 9;
@@ -139,15 +155,15 @@
             // FilterByFatherCombo
             // 
             this.FilterByFatherCombo.FormattingEnabled = true;
-            this.FilterByFatherCombo.Location = new System.Drawing.Point(514, 43);
+            this.FilterByFatherCombo.Location = new System.Drawing.Point(471, 43);
             this.FilterByFatherCombo.Name = "FilterByFatherCombo";
-            this.FilterByFatherCombo.Size = new System.Drawing.Size(121, 23);
+            this.FilterByFatherCombo.Size = new System.Drawing.Size(111, 23);
             this.FilterByFatherCombo.TabIndex = 8;
             // 
             // BySurnameFilterLabel
             // 
             this.BySurnameFilterLabel.AutoSize = true;
-            this.BySurnameFilterLabel.Location = new System.Drawing.Point(387, 19);
+            this.BySurnameFilterLabel.Location = new System.Drawing.Point(354, 19);
             this.BySurnameFilterLabel.Name = "BySurnameFilterLabel";
             this.BySurnameFilterLabel.Size = new System.Drawing.Size(69, 15);
             this.BySurnameFilterLabel.TabIndex = 7;
@@ -156,23 +172,23 @@
             // FilterBySurnameCombo
             // 
             this.FilterBySurnameCombo.FormattingEnabled = true;
-            this.FilterBySurnameCombo.Location = new System.Drawing.Point(387, 43);
+            this.FilterBySurnameCombo.Location = new System.Drawing.Point(354, 43);
             this.FilterBySurnameCombo.Name = "FilterBySurnameCombo";
-            this.FilterBySurnameCombo.Size = new System.Drawing.Size(121, 23);
+            this.FilterBySurnameCombo.Size = new System.Drawing.Size(111, 23);
             this.FilterBySurnameCombo.TabIndex = 6;
             // 
             // FilterByNameCombo
             // 
             this.FilterByNameCombo.FormattingEnabled = true;
-            this.FilterByNameCombo.Location = new System.Drawing.Point(260, 43);
+            this.FilterByNameCombo.Location = new System.Drawing.Point(238, 43);
             this.FilterByNameCombo.Name = "FilterByNameCombo";
-            this.FilterByNameCombo.Size = new System.Drawing.Size(121, 23);
+            this.FilterByNameCombo.Size = new System.Drawing.Size(111, 23);
             this.FilterByNameCombo.TabIndex = 5;
             // 
             // ByNameFilterLabel
             // 
             this.ByNameFilterLabel.AutoSize = true;
-            this.ByNameFilterLabel.Location = new System.Drawing.Point(260, 19);
+            this.ByNameFilterLabel.Location = new System.Drawing.Point(238, 19);
             this.ByNameFilterLabel.Name = "ByNameFilterLabel";
             this.ByNameFilterLabel.Size = new System.Drawing.Size(53, 15);
             this.ByNameFilterLabel.TabIndex = 4;
@@ -181,7 +197,7 @@
             // ByDeptFilterLabel
             // 
             this.ByDeptFilterLabel.AutoSize = true;
-            this.ByDeptFilterLabel.Location = new System.Drawing.Point(133, 19);
+            this.ByDeptFilterLabel.Location = new System.Drawing.Point(122, 19);
             this.ByDeptFilterLabel.Name = "ByDeptFilterLabel";
             this.ByDeptFilterLabel.Size = new System.Drawing.Size(85, 15);
             this.ByDeptFilterLabel.TabIndex = 3;
@@ -190,9 +206,9 @@
             // FilterByDeptCombo
             // 
             this.FilterByDeptCombo.FormattingEnabled = true;
-            this.FilterByDeptCombo.Location = new System.Drawing.Point(133, 43);
+            this.FilterByDeptCombo.Location = new System.Drawing.Point(122, 43);
             this.FilterByDeptCombo.Name = "FilterByDeptCombo";
-            this.FilterByDeptCombo.Size = new System.Drawing.Size(121, 23);
+            this.FilterByDeptCombo.Size = new System.Drawing.Size(111, 23);
             this.FilterByDeptCombo.TabIndex = 2;
             // 
             // ByPosFilterLabel
@@ -209,24 +225,78 @@
             this.FilterByPosCombo.FormattingEnabled = true;
             this.FilterByPosCombo.Location = new System.Drawing.Point(6, 43);
             this.FilterByPosCombo.Name = "FilterByPosCombo";
-            this.FilterByPosCombo.Size = new System.Drawing.Size(121, 23);
+            this.FilterByPosCombo.Size = new System.Drawing.Size(111, 23);
             this.FilterByPosCombo.TabIndex = 0;
             // 
-            // ClearFiltersBtn
+            // CreateReportBtn
             // 
-            this.ClearFiltersBtn.Location = new System.Drawing.Point(641, 19);
-            this.ClearFiltersBtn.Name = "ClearFiltersBtn";
-            this.ClearFiltersBtn.Size = new System.Drawing.Size(129, 23);
-            this.ClearFiltersBtn.TabIndex = 11;
-            this.ClearFiltersBtn.Text = "Clear";
-            this.ClearFiltersBtn.UseVisualStyleBackColor = true;
-            this.ClearFiltersBtn.Click += new System.EventHandler(this.ClearFiltersBtn_Click);
+            this.CreateReportBtn.Location = new System.Drawing.Point(179, 17);
+            this.CreateReportBtn.Name = "CreateReportBtn";
+            this.CreateReportBtn.Size = new System.Drawing.Size(85, 46);
+            this.CreateReportBtn.TabIndex = 12;
+            this.CreateReportBtn.Text = "Create salary report";
+            this.CreateReportBtn.UseVisualStyleBackColor = true;
+            this.CreateReportBtn.Click += new System.EventHandler(this.CreateRaportBtn_Click);
+            // 
+            // SalaryReport
+            // 
+            this.SalaryReport.Controls.Add(this.RefreshBtn);
+            this.SalaryReport.Controls.Add(this.GroupByPosCheck);
+            this.SalaryReport.Controls.Add(this.GroupByDeptCheck);
+            this.SalaryReport.Controls.Add(this.GroupByLabel);
+            this.SalaryReport.Controls.Add(this.CreateReportBtn);
+            this.SalaryReport.Location = new System.Drawing.Point(691, 12);
+            this.SalaryReport.Name = "SalaryReport";
+            this.SalaryReport.Size = new System.Drawing.Size(424, 68);
+            this.SalaryReport.TabIndex = 2;
+            this.SalaryReport.TabStop = false;
+            this.SalaryReport.Text = "Salary report";
+            // 
+            // GroupByPosCheck
+            // 
+            this.GroupByPosCheck.AutoSize = true;
+            this.GroupByPosCheck.Location = new System.Drawing.Point(68, 43);
+            this.GroupByPosCheck.Name = "GroupByPosCheck";
+            this.GroupByPosCheck.Size = new System.Drawing.Size(85, 19);
+            this.GroupByPosCheck.TabIndex = 15;
+            this.GroupByPosCheck.Text = "By Position";
+            this.GroupByPosCheck.UseVisualStyleBackColor = true;
+            // 
+            // GroupByDeptCheck
+            // 
+            this.GroupByDeptCheck.AutoSize = true;
+            this.GroupByDeptCheck.Location = new System.Drawing.Point(68, 18);
+            this.GroupByDeptCheck.Name = "GroupByDeptCheck";
+            this.GroupByDeptCheck.Size = new System.Drawing.Size(105, 19);
+            this.GroupByDeptCheck.TabIndex = 14;
+            this.GroupByDeptCheck.Text = "By Department";
+            this.GroupByDeptCheck.UseVisualStyleBackColor = true;
+            // 
+            // GroupByLabel
+            // 
+            this.GroupByLabel.AutoSize = true;
+            this.GroupByLabel.Location = new System.Drawing.Point(6, 19);
+            this.GroupByLabel.Name = "GroupByLabel";
+            this.GroupByLabel.Size = new System.Drawing.Size(56, 15);
+            this.GroupByLabel.TabIndex = 13;
+            this.GroupByLabel.Text = "Group by";
+            // 
+            // RefreshBtn
+            // 
+            this.RefreshBtn.Location = new System.Drawing.Point(333, 17);
+            this.RefreshBtn.Name = "RefreshBtn";
+            this.RefreshBtn.Size = new System.Drawing.Size(85, 46);
+            this.RefreshBtn.TabIndex = 16;
+            this.RefreshBtn.Text = "Refresh";
+            this.RefreshBtn.UseVisualStyleBackColor = true;
+            this.RefreshBtn.Click += new System.EventHandler(this.RefreshBtn_Click);
             // 
             // EmployeesViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1134, 450);
+            this.Controls.Add(this.SalaryReport);
             this.Controls.Add(this.FiltersBox);
             this.Controls.Add(this.EmpGridView);
             this.Name = "EmployeesViewForm";
@@ -237,6 +307,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.EmpGridView)).EndInit();
             this.FiltersBox.ResumeLayout(false);
             this.FiltersBox.PerformLayout();
+            this.SalaryReport.ResumeLayout(false);
+            this.SalaryReport.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -259,5 +331,11 @@
         private DataGridViewButtonColumn Edit;
         private DataGridViewButtonColumn Delete;
         private Button ClearFiltersBtn;
+        private Button CreateReportBtn;
+        private GroupBox SalaryReport;
+        private Label GroupByLabel;
+        private CheckBox GroupByPosCheck;
+        private CheckBox GroupByDeptCheck;
+        private Button RefreshBtn;
     }
 }
