@@ -1,9 +1,11 @@
-using System.Data.SqlClient;
+using WinFormsTest.Domain.Concrete;
+using WinFormsTest.Models;
 
 namespace WinFormsTest
 {
     public partial class MenuForm : Form
     {
+        private TextFieldRepository textFieldRepository = new TextFieldRepository();
         public MenuForm()
         {
             InitializeComponent();
@@ -31,6 +33,18 @@ namespace WinFormsTest
         {
             AddNewPosForm addPos = new AddNewPosForm();
             addPos.ShowDialog();
+        }
+
+        private void CompanyInfoEditBtn_Click(object sender, EventArgs e)
+        {
+            TextFieldAddForm textFieldAdd = new TextFieldAddForm(textFieldRepository.GetTextField("1"));
+            textFieldAdd.ShowDialog();
+        }
+
+        private void MenuForm_Activated(object sender, EventArgs e)
+        {
+            var text = textFieldRepository.GetTextField("1").Text.ToString();
+            CompanyInfoTextBox.Text = text;
         }
     }
 }

@@ -12,51 +12,24 @@ namespace WinFormsTest.Domain
         public SqlDataReader Reader;
 
         /// <summary>
-        /// Saving Employee to DB
+        /// Delete record
         /// </summary>
-        /// <param name="employee">employee entity</param>
-        /// <param name="mode">true if new record, false if update old</param>
-        public void SaveEmployee(Employee employee, bool mode)
-        {
-            string sql;
-            string msg;
-
-            switch (mode)
-            {
-                case (true):
-                    sql = $"insert into Employees(Name, Surname, FatherName, Address," +
-                    " Phone, DateOfBirth, DateOfHire, Salary, DeptId, PosId) " +
-                    "values(@Name, @Surname, @FatherName, @Address, @Phone, @DateOfBirth, @DateOfHire, @Salary, " +
-                    "@DeptId, @PosId)";
-
-                    msg = "Added!";
-                    break;
-                case (false):
-                    sql = "update Employees set Name = @Name, Surname = @Surname, FatherName = @FatherName, Address = @Address," +
-                    " Phone = @Phone, DateOfBirth = @DateOfBirth, DateOfHire = @DateOfHire, Salary = @Salary, DeptId = @DeptId, PosId = @PosId " +
-                    $"where Id = {employee.Id}";
-
-                    msg = "Updated!";
-                    break;
-            }
-
+        /// <param name="id">Id of record</param>
+        /// <param name="tableName">Name of table</param>
+        public void Delete(string id, string tableName)
+        { 
             SqlConnection.Open();
-            Cmd = new SqlCommand(sql, SqlConnection);
-            Cmd.Parameters.AddWithValue("@Name", employee.Name);
-            Cmd.Parameters.AddWithValue("@Surname", employee.Surname);
-            Cmd.Parameters.AddWithValue("@FatherName", employee.FatherName);
-            Cmd.Parameters.AddWithValue("@Address", employee.Address);
-            Cmd.Parameters.AddWithValue("@Phone", employee.Phone);
-            Cmd.Parameters.AddWithValue("@DateOfBirth", employee.DateOfBirth);
-            Cmd.Parameters.AddWithValue("@DateOfHire", employee.DateOfHire);
-            Cmd.Parameters.AddWithValue("@Salary", employee.Salary);
-            Cmd.Parameters.AddWithValue("@DeptId", employee.DeptId);
-            Cmd.Parameters.AddWithValue("@PosId", employee.PosId);
+            Cmd = new SqlCommand($"delete from {tableName} where Id = {id}", SqlConnection);
             Cmd.ExecuteNonQuery();
-            MessageBox.Show(msg);
             SqlConnection.Close();
+            MessageBox.Show("Deleted!");
         }
 
+        /// <summary>
+        /// Saving for single string fields, like Department or Positon
+        /// </summary>
+        /// <param name="entity">ISingleEntity object</param>
+        /// <param name="tableName">Name of table</param>
         public void Save(ISingleEntity entity, string tableName)
         {
             SqlConnection.Open();
@@ -67,15 +40,23 @@ namespace WinFormsTest.Domain
             SqlConnection.Close();
         }
 
+        /// <summary>
+        /// Getting Id and Name of items
+        /// </summary>
+        /// <param name="tableName">Name of table</param>
+        /// <returns></returns>
         public Dictionary<string, string> GetAllNames(string tableName)
         {
-            Cmd = new SqlCommand($"select * from {tableName}", SqlConnection);
+            Cmd = new SqlCommand($"select Id, Name from {tableName}", SqlConnection);
             SqlConnection.Open();
             Reader = Cmd.ExecuteReader();
             var entities = new Dictionary<string, string>();
             while (Reader.Read())
             {
-                entities.Add(Reader["Id"].ToString(), Reader["Name"].ToString());
+                if (Reader["Id"] != null)
+                {
+                    entities.Add(Reader["Id"].ToString(), Reader["Name"].ToString());
+                }
             }
             return entities;
         }

@@ -233,6 +233,7 @@ namespace WinFormsTest
             this.ClearBtn.TabIndex = 21;
             this.ClearBtn.Text = "Clear";
             this.ClearBtn.UseVisualStyleBackColor = true;
+            this.ClearBtn.Click += new System.EventHandler(this.ClearBtn_Click);
             // 
             // AddEmpForm
             // 
@@ -263,6 +264,7 @@ namespace WinFormsTest
             this.Controls.Add(this.NameLabel);
             this.Name = "AddEmpForm";
             this.Text = "Add New Employee";
+            this.Activated += new System.EventHandler(this.AddEmpForm_Activated);
             this.Load += new System.EventHandler(this.AddEmpForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

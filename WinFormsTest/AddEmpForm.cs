@@ -22,6 +22,7 @@ namespace WinFormsTest
             if (Employee.Name != null)
             {
                 Employee.Id = Convert.ToInt32(id);
+
                 NameTextBox.Text = Employee.Name;
                 SurnameTextBox.Text = Employee.Surname;
                 FathernameTextBox.Text = Employee.FatherName;
@@ -30,8 +31,7 @@ namespace WinFormsTest
                 BirthDatePicker.Value = Employee.DateOfBirth;
                 HireDatePicker.Value = Employee.DateOfHire;
                 SalaryTextBox.Text = Employee.Salary.ToString();
-                DeptComboBox.SelectedValue = Employee.DeptId;
-                PosComboBox.SelectedValue = Employee.PosId;
+
                 _mode = false;
             }
         }
@@ -74,6 +74,26 @@ namespace WinFormsTest
             PosComboBox.DataSource = new BindingSource(prepository.GetPositions(), null);
             PosComboBox.DisplayMember = "Value";
             PosComboBox.ValueMember = "Key";
+
+
+        }
+
+        private void AddEmpForm_Activated(object sender, EventArgs e)
+        {
+            DeptComboBox.SelectedIndex = Employee.DeptId - 1;
+            PosComboBox.SelectedIndex = Employee.PosId - 1;
+        }
+
+        private void ClearBtn_Click(object sender, EventArgs e)
+        {
+            NameTextBox.Clear();
+            SurnameTextBox.Clear();
+            FathernameTextBox.Clear();
+            AddressTextBox.Clear();
+            PhoneTextBox.Clear();
+            SalaryTextBox.Clear();
+            PosComboBox.SelectedItem = null;
+            DeptComboBox.SelectedItem = null;
         }
     }
 }

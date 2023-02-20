@@ -9,10 +9,55 @@ namespace WinFormsTest.Domain.Concrete
         private readonly AppDbContext context = new AppDbContext();
 
         public EmployeeRepository() { }
-
+        /// <summary>
+        /// Saving Employee to DB
+        /// </summary>
+        /// <param name="employee">employee entity</param>
+        /// <param name="mode">true if new record, false if update old</param>
         public void Save(Employee employee, bool mode)
         {
-            context.SaveEmployee(employee, mode);
+            string sql;
+            string msg;
+
+            switch (mode)
+            {
+                case (true):
+                    sql = $"insert into Employees(Name, Surname, FatherName, Address," +
+                    " Phone, DateOfBirth, DateOfHire, Salary, DeptId, PosId) " +
+                    "values(@Name, @Surname, @FatherName, @Address, @Phone, @DateOfBirth, @DateOfHire, @Salary, " +
+                    "@DeptId, @PosId)";
+
+                    msg = "Added!";
+                    break;
+                case (false):
+                    sql = "update Employees set Name = @Name, Surname = @Surname, FatherName = @FatherName, Address = @Address," +
+                    " Phone = @Phone, DateOfBirth = @DateOfBirth, DateOfHire = @DateOfHire, Salary = @Salary, DeptId = @DeptId, PosId = @PosId " +
+                    $"where Id = {employee.Id}";
+
+                    msg = "Updated!";
+                    break;
+            }
+
+            context.SqlConnection.Open();
+            context.Cmd = new SqlCommand(sql, context.SqlConnection);
+            context.Cmd.Parameters.AddWithValue("@Name", employee.Name);
+            context.Cmd.Parameters.AddWithValue("@Surname", employee.Surname);
+            context.Cmd.Parameters.AddWithValue("@FatherName", employee.FatherName);
+            context.Cmd.Parameters.AddWithValue("@Address", employee.Address);
+            context.Cmd.Parameters.AddWithValue("@Phone", employee.Phone);
+            context.Cmd.Parameters.AddWithValue("@DateOfBirth", employee.DateOfBirth);
+            context.Cmd.Parameters.AddWithValue("@DateOfHire", employee.DateOfHire);
+            context.Cmd.Parameters.AddWithValue("@Salary", employee.Salary);
+            context.Cmd.Parameters.AddWithValue("@DeptId", employee.DeptId);
+            context.Cmd.Parameters.AddWithValue("@PosId", employee.PosId);
+            context.Cmd.ExecuteNonQuery();
+            MessageBox.Show(msg);
+            context.SqlConnection.Close();
+        }
+
+        public void Delete(string id)
+        {
+            context.Delete(id, "Employees");
         }
 
         public void Load(DataGridView gridView)

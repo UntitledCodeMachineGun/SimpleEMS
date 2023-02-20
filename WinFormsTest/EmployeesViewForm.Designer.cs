@@ -191,6 +191,7 @@
             this.Name = "EmployeesViewForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Employees View";
+            this.Activated += new System.EventHandler(this.EmployeesViewForm_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.EmpGridView)).EndInit();
             this.ResumeLayout(false);
 

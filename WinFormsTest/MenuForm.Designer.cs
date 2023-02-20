@@ -35,12 +35,17 @@
             this.ReportBtn = new System.Windows.Forms.Button();
             this.AddNewDeptBtn = new System.Windows.Forms.Button();
             this.AddNewPosBtn = new System.Windows.Forms.Button();
+            this.CompanyInfoEditBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // CompanyInfoTextBox
             // 
+            this.CompanyInfoTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.CompanyInfoTextBox.Location = new System.Drawing.Point(386, 12);
             this.CompanyInfoTextBox.Name = "CompanyInfoTextBox";
+            this.CompanyInfoTextBox.ReadOnly = true;
             this.CompanyInfoTextBox.Size = new System.Drawing.Size(402, 426);
             this.CompanyInfoTextBox.TabIndex = 0;
             this.CompanyInfoTextBox.Text = "";
@@ -49,7 +54,7 @@
             // 
             this.CompanyNameLabel.AutoSize = true;
             this.CompanyNameLabel.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CompanyNameLabel.Location = new System.Drawing.Point(63, 49);
+            this.CompanyNameLabel.Location = new System.Drawing.Point(66, 33);
             this.CompanyNameLabel.Name = "CompanyNameLabel";
             this.CompanyNameLabel.Size = new System.Drawing.Size(254, 45);
             this.CompanyNameLabel.TabIndex = 1;
@@ -57,7 +62,7 @@
             // 
             // ShowEmpBtn
             // 
-            this.ShowEmpBtn.Location = new System.Drawing.Point(12, 164);
+            this.ShowEmpBtn.Location = new System.Drawing.Point(12, 110);
             this.ShowEmpBtn.Name = "ShowEmpBtn";
             this.ShowEmpBtn.Size = new System.Drawing.Size(368, 50);
             this.ShowEmpBtn.TabIndex = 2;
@@ -67,7 +72,7 @@
             // 
             // AddNewEmpBtn
             // 
-            this.AddNewEmpBtn.Location = new System.Drawing.Point(12, 276);
+            this.AddNewEmpBtn.Location = new System.Drawing.Point(12, 222);
             this.AddNewEmpBtn.Name = "AddNewEmpBtn";
             this.AddNewEmpBtn.Size = new System.Drawing.Size(368, 50);
             this.AddNewEmpBtn.TabIndex = 3;
@@ -77,7 +82,7 @@
             // 
             // ReportBtn
             // 
-            this.ReportBtn.Location = new System.Drawing.Point(12, 220);
+            this.ReportBtn.Location = new System.Drawing.Point(12, 166);
             this.ReportBtn.Name = "ReportBtn";
             this.ReportBtn.Size = new System.Drawing.Size(368, 50);
             this.ReportBtn.TabIndex = 4;
@@ -86,7 +91,7 @@
             // 
             // AddNewDeptBtn
             // 
-            this.AddNewDeptBtn.Location = new System.Drawing.Point(12, 332);
+            this.AddNewDeptBtn.Location = new System.Drawing.Point(12, 278);
             this.AddNewDeptBtn.Name = "AddNewDeptBtn";
             this.AddNewDeptBtn.Size = new System.Drawing.Size(368, 50);
             this.AddNewDeptBtn.TabIndex = 5;
@@ -96,7 +101,7 @@
             // 
             // AddNewPosBtn
             // 
-            this.AddNewPosBtn.Location = new System.Drawing.Point(12, 388);
+            this.AddNewPosBtn.Location = new System.Drawing.Point(12, 334);
             this.AddNewPosBtn.Name = "AddNewPosBtn";
             this.AddNewPosBtn.Size = new System.Drawing.Size(368, 50);
             this.AddNewPosBtn.TabIndex = 6;
@@ -104,11 +109,22 @@
             this.AddNewPosBtn.UseVisualStyleBackColor = true;
             this.AddNewPosBtn.Click += new System.EventHandler(this.AddNewPosBtn_Click);
             // 
+            // CompanyInfoEditBtn
+            // 
+            this.CompanyInfoEditBtn.Location = new System.Drawing.Point(12, 389);
+            this.CompanyInfoEditBtn.Name = "CompanyInfoEditBtn";
+            this.CompanyInfoEditBtn.Size = new System.Drawing.Size(368, 50);
+            this.CompanyInfoEditBtn.TabIndex = 7;
+            this.CompanyInfoEditBtn.Text = "Edit company info";
+            this.CompanyInfoEditBtn.UseVisualStyleBackColor = true;
+            this.CompanyInfoEditBtn.Click += new System.EventHandler(this.CompanyInfoEditBtn_Click);
+            // 
             // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.CompanyInfoEditBtn);
             this.Controls.Add(this.AddNewPosBtn);
             this.Controls.Add(this.AddNewDeptBtn);
             this.Controls.Add(this.ReportBtn);
@@ -119,6 +135,7 @@
             this.Name = "MenuForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu";
+            this.Activated += new System.EventHandler(this.MenuForm_Activated);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -133,5 +150,6 @@
         private Button ReportBtn;
         private Button AddNewDeptBtn;
         private Button AddNewPosBtn;
+        private Button CompanyInfoEditBtn;
     }
 }
