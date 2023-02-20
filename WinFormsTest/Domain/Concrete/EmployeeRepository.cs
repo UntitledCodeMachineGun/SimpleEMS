@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System.Data;
+using System.Data.SqlClient;
 using WinFormsTest.Domain.Abstract;
 using WinFormsTest.Models;
 
@@ -60,22 +61,24 @@ namespace WinFormsTest.Domain.Concrete
             context.Delete(id, "Employees");
         }
 
+        
+
         public void Load(DataGridView gridView)
         {
             try
             {
-               var sql = "select * from Employees e left join Departments d on e.DeptId = d.Id left join Positions p on e.PosId = p.Id";
-                context.Cmd = new SqlCommand(sql, context.SqlConnection);
+                var dataTable = new DataTable();
+
                 context.SqlConnection.Open();
 
-                context.Reader = context.Cmd.ExecuteReader();
-                gridView.Rows.Clear();
-
-                while (context.Reader.Read())
+                using (SqlDataAdapter adapter = new SqlDataAdapter(
+                    "select e.Id, e.Name, e.Surname, e.FatherName, e.Address, e.Phone, e.DateOfBirth, e.DateOfHire, e.Salary, " +
+                    "d.Name as Department, p.Name as Position, e.DeptId, e.PosId from Employees e left join Departments d on e.DeptId = d.Id left join Positions p on e.PosId = p.Id",
+                    context.SqlConnection))
                 {
-                    gridView.Rows.Add(context.Reader[0], context.Reader[1], context.Reader[2], context.Reader[3], context.Reader[4],
-                        context.Reader[5], context.Reader[6], context.Reader[7], context.Reader[8], context.Reader[12], context.Reader[14]);
+                    adapter.Fill(dataTable);
                 }
+                gridView.DataSource = new DataView(dataTable);
                 context.SqlConnection.Close();
             }
             catch (Exception ex)
@@ -106,6 +109,21 @@ namespace WinFormsTest.Domain.Concrete
 
             context.SqlConnection.Close();
             return employee;
+        }
+
+        public List<string> GetNames()
+        {
+            return context.GetStrings("Employees", "Name");
+        }
+
+        public List<string> GetSurnames()
+        {
+            return context.GetStrings("Employees", "Surname");
+        }
+
+        public List<string> GetFatherNames()
+        {
+            return context.GetStrings("Employees", "FatherName");
         }
     }
 }

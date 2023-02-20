@@ -10,6 +10,7 @@ namespace WinFormsTest.Domain
         public SqlConnection SqlConnection = new SqlConnection(_connectionString);
         public SqlCommand Cmd;
         public SqlDataReader Reader;
+        public SqlDataAdapter Adapter;
 
         /// <summary>
         /// Delete record
@@ -58,6 +59,24 @@ namespace WinFormsTest.Domain
                     entities.Add(Reader["Id"].ToString(), Reader["Name"].ToString());
                 }
             }
+            SqlConnection.Close();
+            return entities;
+        }
+
+        public List<string> GetStrings(string tableName, string columnName)
+        {
+            Cmd = new SqlCommand($"select {columnName} from {tableName}", SqlConnection);
+            SqlConnection.Open();
+            Reader = Cmd.ExecuteReader();
+            var entities = new List<string>();
+            while (Reader.Read())
+            {
+                if (Reader[0] != null)
+                {
+                    entities.Add(Reader[0].ToString());
+                }
+            }
+            SqlConnection.Close();
             return entities;
         }
     }
