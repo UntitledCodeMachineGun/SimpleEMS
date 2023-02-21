@@ -23,16 +23,18 @@ namespace WinFormsTest.Domain.Concrete
             switch (mode)
             {
                 case (true):
-                    sql = $"insert into Employees(Name, Surname, FatherName, Address," +
+                    sql = "insert into Employees(Name, Surname, FatherName, Address," +
                     " Phone, DateOfBirth, DateOfHire, Salary, DeptId, PosId) " +
-                    "values(@Name, @Surname, @FatherName, @Address, @Phone, @DateOfBirth, @DateOfHire, @Salary, " +
-                    "@DeptId, @PosId)";
+                    $"values(N'{employee.Name}', N'{employee.Surname}', N'{employee.FatherName}', N'{employee.Address}', " +
+                    $"N'{employee.Phone}', '{employee.DateOfBirth}', '{employee.DateOfHire}', '{employee.Salary}', " +
+                    $"'{employee.DeptId}', '{employee.PosId}')";
 
                     msg = "Added!";
                     break;
                 case (false):
-                    sql = "update Employees set Name = @Name, Surname = @Surname, FatherName = @FatherName, Address = @Address," +
-                    " Phone = @Phone, DateOfBirth = @DateOfBirth, DateOfHire = @DateOfHire, Salary = @Salary, DeptId = @DeptId, PosId = @PosId " +
+                    sql = $"update Employees set Name = N'{employee.Name}', Surname = N'{employee.Surname}', FatherName = N'{employee.FatherName}', " +
+                        $"Address = N'{employee.Address}', Phone = N'{employee.Phone}', DateOfBirth = '{employee.DateOfBirth}', " +
+                        $"DateOfHire = '{employee.DateOfHire}', Salary = '{employee.Salary}', DeptId = '{employee.DeptId}', PosId = '{employee.PosId}' " +
                     $"where Id = {employee.Id}";
 
                     msg = "Updated!";
@@ -41,16 +43,6 @@ namespace WinFormsTest.Domain.Concrete
 
             context.SqlConnection.Open();
             context.Cmd = new SqlCommand(sql, context.SqlConnection);
-            context.Cmd.Parameters.AddWithValue("@Name", employee.Name);
-            context.Cmd.Parameters.AddWithValue("@Surname", employee.Surname);
-            context.Cmd.Parameters.AddWithValue("@FatherName", employee.FatherName);
-            context.Cmd.Parameters.AddWithValue("@Address", employee.Address);
-            context.Cmd.Parameters.AddWithValue("@Phone", employee.Phone);
-            context.Cmd.Parameters.AddWithValue("@DateOfBirth", employee.DateOfBirth);
-            context.Cmd.Parameters.AddWithValue("@DateOfHire", employee.DateOfHire);
-            context.Cmd.Parameters.AddWithValue("@Salary", employee.Salary);
-            context.Cmd.Parameters.AddWithValue("@DeptId", employee.DeptId);
-            context.Cmd.Parameters.AddWithValue("@PosId", employee.PosId);
             context.Cmd.ExecuteNonQuery();
             MessageBox.Show(msg);
             context.SqlConnection.Close();
@@ -89,7 +81,7 @@ namespace WinFormsTest.Domain.Concrete
 
         public Employee GetToEditEmployeeById(string Id)
         {
-            context.Cmd = new SqlCommand("select * from Employees where Id = '" + Id + "' ", context.SqlConnection);
+            context.Cmd = new SqlCommand($"select * from Employees where Id = '{Id}' ", context.SqlConnection);
             context.SqlConnection.Open();
             context.Reader = context.Cmd.ExecuteReader();
             var employee = new Employee();

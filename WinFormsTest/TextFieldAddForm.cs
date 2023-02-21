@@ -12,6 +12,7 @@ namespace WinFormsTest
         {
             InitializeComponent();
 
+
             TextField = text;
 
             if (TextField.Id == 0)

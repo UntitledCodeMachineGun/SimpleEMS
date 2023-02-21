@@ -32,8 +32,7 @@ namespace WinFormsTest.Domain
         public void Save(ISingleEntity entity, string tableName)
         {
             SqlConnection.Open();
-            Cmd = new SqlCommand($"insert into {tableName}(Name) values(@Name)", SqlConnection);
-            Cmd.Parameters.AddWithValue("@Name", entity.Name);
+            Cmd = new SqlCommand($"insert into {tableName}(Name) values(N'{entity.Name}')", SqlConnection);
             Cmd.ExecuteNonQuery();
             MessageBox.Show("Added!");
             SqlConnection.Close();

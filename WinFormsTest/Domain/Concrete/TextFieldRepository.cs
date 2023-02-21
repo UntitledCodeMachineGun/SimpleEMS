@@ -20,11 +20,11 @@ namespace WinFormsTest.Domain.Concrete
             switch (mode)
             {
                 case true:
-                    context.Cmd = new SqlCommand($"insert into TextFields (Name, Text) values('{name}', '{text}')", context.SqlConnection);
+                    context.Cmd = new SqlCommand($"insert into TextFields (Name, Text) values(N'{name}', N'{text}')", context.SqlConnection);
                     msg = "Added!";
                     break;
                 case false:
-                    context.Cmd = new SqlCommand($"update TextFields set Name = '{name}', Text = '{text}'", context.SqlConnection);
+                    context.Cmd = new SqlCommand($"update TextFields set Name = N'{name}', Text = N'{text}'", context.SqlConnection);
                     msg = "Updated!";
                     break;
             }
@@ -54,6 +54,10 @@ namespace WinFormsTest.Domain.Concrete
                 }
             }
             context.SqlConnection.Close();
+            if (string.IsNullOrEmpty(field.Text))
+            {
+                return new TextField() { Id = Convert.ToInt32(id) };
+            }
             return field;
         }
     }

@@ -43,7 +43,8 @@ namespace WinFormsTest
 
         private void MenuForm_Activated(object sender, EventArgs e)
         {
-            var text = textFieldRepository.GetTextField("1").Text.ToString();
+
+            var text = textFieldRepository.GetTextField("1").Text;
             CompanyInfoTextBox.Text = text;
         }
     }

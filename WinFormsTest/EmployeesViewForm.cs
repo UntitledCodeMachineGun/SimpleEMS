@@ -58,20 +58,37 @@ namespace WinFormsTest
             var prepository = new PositionRepository();
             var emplRepository = new EmployeeRepository();
 
-            FilterByDeptCombo.DataSource = new BindingSource(drepository.GetDepartments(), null);
-            FilterByDeptCombo.DisplayMember = "Value";
-            FilterByDeptCombo.ValueMember = "Key";
+            if (drepository.GetDepartments().Count > 0)
+            {
+                FilterByDeptCombo.DataSource = new BindingSource(drepository.GetDepartments(), null);
+                FilterByDeptCombo.DisplayMember = "Value";
+                FilterByDeptCombo.ValueMember = "Key";
+            }
 
-            FilterByPosCombo.DataSource = new BindingSource(prepository.GetPositions(), null);
-            FilterByPosCombo.DisplayMember = "Value";
-            FilterByPosCombo.ValueMember = "Key";
+            if (prepository.GetPositions().Count > 0)
+            {
+                FilterByPosCombo.DataSource = new BindingSource(prepository.GetPositions(), null);
+                FilterByPosCombo.DisplayMember = "Value";
+                FilterByPosCombo.ValueMember = "Key";
+            }
 
-            FilterByNameCombo.DataSource = new BindingSource(emplRepository.GetNames(), null);
-            FilterByNameCombo.DisplayMember = "Value";
-            FilterBySurnameCombo.DataSource = new BindingSource(emplRepository.GetSurnames(), null);
-            FilterBySurnameCombo.DisplayMember = "Value";
-            FilterByFatherCombo.DataSource = new BindingSource(emplRepository.GetFatherNames(), null);
-            FilterByFatherCombo.DisplayMember = "Value";
+            if (emplRepository.GetNames().Count > 0)
+            {
+                FilterByNameCombo.DataSource = new BindingSource(emplRepository.GetNames(), null);
+                FilterByNameCombo.DisplayMember = "Value";
+            }
+
+            if (emplRepository.GetSurnames().Count > 0)
+            {
+                FilterBySurnameCombo.DataSource = new BindingSource(emplRepository.GetSurnames(), null);
+                FilterBySurnameCombo.DisplayMember = "Value";
+            }
+
+            if(emplRepository.GetFatherNames().Count > 0)
+            {
+                FilterByFatherCombo.DataSource = new BindingSource(emplRepository.GetFatherNames(), null);
+                FilterByFatherCombo.DisplayMember = "Value";
+            }
 
             FilterByDeptCombo.SelectedItem = null;
             FilterByPosCombo.SelectedItem = null;
