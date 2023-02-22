@@ -67,7 +67,7 @@ namespace WinFormsTest.Domain
         /// <returns></returns>
         public List<string> GetStrings(string tableName, string columnName)
         {
-            Cmd = new SqlCommand($"select {columnName} from {tableName}", SqlConnection);
+            Cmd = new SqlCommand($"select distinct {columnName} from {tableName}", SqlConnection);
             SqlConnection.Open();
             Reader = Cmd.ExecuteReader();
             var entities = new List<string>();
