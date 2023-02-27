@@ -1,4 +1,5 @@
 ﻿using System.Data.SqlClient;
+using WinFormsTest.Models;
 using WinFormsTest.Models.Abstract;
 
 namespace WinFormsTest.Domain
@@ -31,11 +32,43 @@ namespace WinFormsTest.Domain
         /// <param name="tableName">Name of table</param>
         public void Save(ISingleEntity entity, string tableName)
         {
+            if (IsExists(entity, tableName))
+            {
+                MessageBox.Show($"{entity.Name} is already exists!");
+            }
+            else
+            {
+                SqlConnection.Open();
+                Cmd = new SqlCommand($"insert into {tableName}(Name) values(N'{entity.Name}')", SqlConnection);
+                Cmd.ExecuteNonQuery();
+                MessageBox.Show("Added!");
+                SqlConnection.Close();
+            }
+        }
+
+        /// <summary>
+        /// Is department or position is exists
+        /// </summary>
+        /// <param name="entity">ISingleEntity object</param>
+        /// <param name="tableName">Name of table</param>
+        /// <returns></returns>
+        public bool IsExists(ISingleEntity entity, string tableName)
+        {
+            bool exists = false;
+
             SqlConnection.Open();
-            Cmd = new SqlCommand($"insert into {tableName}(Name) values(N'{entity.Name}')", SqlConnection);
-            Cmd.ExecuteNonQuery();
-            MessageBox.Show("Added!");
+            Cmd = new SqlCommand($"select Name from {tableName} where Name = N'{entity.Name}'", SqlConnection);
+            Reader = Cmd.ExecuteReader();
+            while (Reader.Read())
+            {
+                if (Reader[0].ToString() == entity.Name)
+                {
+                    exists = true;
+                }
+            }
             SqlConnection.Close();
+            
+             return exists;
         }
 
         /// <summary>
